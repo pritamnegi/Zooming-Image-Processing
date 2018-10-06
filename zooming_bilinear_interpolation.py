@@ -33,9 +33,9 @@ def GetBilinearPixel(imArr, posX, posY):
  
 if __name__=="__main__":
  
+ 	# Insert your file path below
     im = imageio.imread("D:\\My Files\\Zooming DSp\\download.jpg", pilmode="RGB")
     n = int(input("Enter the zooming factor: "))
-#     enlargedShape = list(map(int, [im.shape[0]*1.6, im.shape[1]*1.6, im.shape[2]]))
     enlargedShape = list(map(int, [im.shape[0]*n, im.shape[1]*n, im.shape[2]]))
     enlargedImg = np.empty(enlargedShape, dtype=np.uint8)
     rowScale = float(im.shape[0]) / float(enlargedImg.shape[0])
@@ -50,5 +50,6 @@ if __name__=="__main__":
      # imshow(enlargedImg)
     # plt.imshow(enlargedImg)
     img = Image.fromarray(enlargedImg, 'RGB')
+    # Insert your file path below
     img.save('D:\\My Files\\Zooming DSP\\zoomed_image.jpg')
     img.show()
