@@ -33,9 +33,9 @@ def GetBilinearPixel(imArr, posX, posY):
     return out 
 
 
-def getReplicatedPixel(im, enlargedShape, n): 
+def getReplicatedPixel(im, enlargedRImg, n): 
 
-    enlargedRImg = np.empty(enlargedShape, dtype = np.uint8) 
+    #enlargedRImg = np.empty(enlargedShape, dtype = np.uint8) 
 
     for ch in range(im.shape[2]): 
         for r in range(0, im.shape[0]*n - 1): 
@@ -48,7 +48,7 @@ def getReplicatedPixel(im, enlargedShape, n):
                 # Finding the location of the row of the original image in the enlarged image 
 
                 
-                enlargedRImg[r-1, c-1, ch] = im[enR-1, enC-1, ch]
+                enlargedRImg[r, c, ch] = im[enR, enC, ch]
                 # for i in range(0, n): 
 
                 #     # Replicating the neighbouring pixels to the value of the pixel in the original image 
@@ -64,7 +64,7 @@ def getReplicatedPixel(im, enlargedShape, n):
  
 if __name__=="__main__":
     
-    im = cv2.imread("drive/My Drive/SEM 7/SEM 7 PROJECTS/DSP/download.jpg", cv2.IMREAD_UNCHANGED) # Reading the image in the BGR format 
+    im = cv2.imread("./download.jpg", cv2.IMREAD_UNCHANGED) # Reading the image in the BGR format 
     im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB) # Converting from BGR to RGB 
     n = int(input("Enter the zooming factor: ")) # Reading the zooming factor 
     
@@ -86,14 +86,14 @@ if __name__=="__main__":
  
      
     
-    enlargedRImg = getReplicatedPixel(im, enlargedShape, n) # Receiving the image from the function getReplicatedPixels 
+    enlargedRImg = getReplicatedPixel(im, enlargedRImg, n) # Receiving the image from the function getReplicatedPixels 
 
     # imshow(enlargedImg) 
     # plt.imshow(enlargedImg) 
     img1 = Image.fromarray(enlargedImg, 'RGB') # Saving the Bilinear Interpolated image in the same directory  
-    img1.save('drive/My Drive/SEM 7/SEM 7 PROJECTS/DSP/zoomed_imageBI.jpg') 
+    img1.save('./zoomed_imageBI.jpg') 
 
     img2 = Image.fromarray(enlargedRImg, 'RGB') # Saving the Replicated Pixels Zoomed image in the same directory 
-    img2.save('drive/My Drive/SEM 7/SEM 7 PROJECTS/DSP/zoomed_imageR.jpg') 
+    img2.save('./zoomed_imageR.jpg') 
     # img2.show() 
     print('Zooming completed Successfully')
